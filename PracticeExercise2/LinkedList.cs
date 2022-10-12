@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics.Metrics;
+using System.Reflection;
 using System.Xml.Linq;
 
 namespace PracticeExercise2
@@ -6,6 +8,8 @@ namespace PracticeExercise2
 
     public class LinkedListNode<T>
     {
+       
+
         public T Data { get; set; }
         public LinkedListNode<T> Next { get; set; }
 
@@ -105,25 +109,136 @@ namespace PracticeExercise2
 
         public T Get(int index)
         {
-            throw new NotImplementedException();
+            var currentNode = Head;
+            int currentIndex = 0;
+
+            if (index < 0 || index >= length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            while (currentNode.Next != null)
+            {
+                if (currentIndex == index)
+                {
+                    return currentNode.Data;
+                }
+
+                currentNode = currentNode.Next;
+                currentIndex++;
+            }
+
+            return default(T);
         }
 
-        public void InsertAfter(T newValue, int existingValue)
+        public void InsertAfter(T newValue, T existingValue)
         {
-            length++;
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
+            
+            //var oldNode = existingValue;
+            var currentNode = Head;
+            int count = 0;
+
+            if (IsEmpty || Contains(existingValue) == false)
+            {
+                Append(newValue);
+            }
+
+            else
+            {
+                while (currentNode != null && !(currentNode.Data.Equals(existingValue)))
+                {
+                    currentNode = currentNode.Next;
+                    count++;
+                }
+
+                InsertAt(newValue, count + 1);
+            }
+
+            
+
+
+            //length++;
+            //var newNode = new LinkedListNode<T>(newValue);
+
+            //var oldNode = existingValue;
+
+            //if (Contains(oldNode) == false)
+            //{
+            //    Append(newValue);
+
+            //}
+            //else
+            //{
+            //    InsertAt(newValue, FirstIndexOf(existingValue) + 1);
+            //}
         }
 
         public void InsertAt(T value, int index)
         {
-            length++;
-            throw new NotImplementedException();
+            if (index < 0 || index > length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            if (index == 0)
+            {
+                Prepend(value);
+            }
+
+            
+
+            var currentNode = Head;
+            int currentIndex = 0;
+
+            
+
+            while (currentNode != null)
+            {
+                if (currentIndex == index -1)
+                {
+                    var newNode = new LinkedListNode<T>(value);
+                    newNode.Next = currentNode.Next;
+                    currentNode.Next = newNode;
+
+                    if (currentNode == Tail)
+                    {
+                        Tail = newNode;
+                    }
+
+                    length++;
+                }
+
+                currentNode = currentNode.Next;
+                currentIndex++;
+            }
         }
+
+
 
         public void Prepend(T value)
         {
+           
+            var newHead = new LinkedListNode<T>(value);
+
+            if (IsEmpty)
+            {
+
+                Head = newHead;
+                Tail = newHead;
+            }
+           
+            else
+            {
+                newHead.Next = Head;
+                Head = newHead;
+
+            }
+
             length++;
-            throw new NotImplementedException();
+
+           
         }
 
         public void Remove(T value)
@@ -143,12 +258,9 @@ namespace PracticeExercise2
                 if (Head == Tail)
                 {
                     Tail = null;
-                    //Head - null
+                    Head = null;
                 }
-                else
-                {
-                    Head = Head.Next;
-                }
+                
                 length--;
                 return;
             }
@@ -183,13 +295,147 @@ namespace PracticeExercise2
 
         public void RemoveAt(int index)
         {
+
+            //var currentNode = Head;
+            //int count = 0;
+
+
+
+
+            //while (currentNode.Next != null && count < length && (currentNode.Data.Equals(existingValue)) == false)
+            //{
+            //    currentNode = currentNode.Next;
+            //    count++;
+            //}
+
+            //InsertAt(newValue, count + 1);
+
+
+            if (index < 0 || index >= length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+
+            if (index < length && index >= 0)
+            { 
+                
+                var currentNode = Head;
+                int currentIndex = 0;
+                
+
+                if (index == 0)
+                {
+                    var deleteHead = currentNode.Next;
+                    
+                    Head = currentNode.Next;
+
+                    length--;
+                    return;
+                }
+
+           
+
+                while (currentNode != null && currentIndex <= index)
+                {
+
+                    
+                    if (currentIndex == (index - 1))
+                    {
+                        var prevNode = currentNode;
+                        var nodeToDelete = currentNode.Next;
+                        if (nodeToDelete == Tail)
+                        {
+                            currentNode.Next = null;
+                            Tail = currentNode;
+                        }
+                        else
+                        {
+                            nodeToDelete = currentNode.Next;
+                            prevNode = nodeToDelete.Next;
+                        }
+
+                        length--;
+                        return;
+                    }
+
+
+
+                    currentNode = currentNode.Next;
+                    currentIndex++;
+                    
+
+                }
+            }
+
+            
+
+            //while (currentNode != null && current <= index)
+            //{
+            //    if (currentNode.Next != null && currentNode.Next.Equals(index))
+            //    {
+            //        var nodeToDelete = currentNode.Next;
+            //        length--;
+            //        if (nodeToDelete == Tail)
+            //        {
+            //            currentNode.Next = null;
+            //            Tail = currentNode;
+            //        }
+            //        else
+            //        {
+            //            currentNode.Next = currentNode.Next.Next;
+            //            nodeToDelete.Next = null;
+            //        }
+            //        return;
+
+
+            //    }
+
+            //    currentNode = currentNode.Next;
+
+            //}
+
+            //    if (index < 0) return;
+            //if (index == 0)
+            //{
+            //    Head = Head.Next;
+            //    return;
+            //}
+
+
+            //var currentNode = Head;
+            //int current = 0;
+            //while (current <= index && currentNode.Next != null)
+            //{
+            //    currentNode = currentNode.Next;
+            //    current++;
+            //}
+            //currentNode = currentNode.Next;
             //length--;
-            throw new NotImplementedException();
         }
 
         public IList<T> Reverse()
         {
+            //var currentNode = Head;
+
+            //while (currentNode != null)
+            //{
+            //    Prepend(currentNode.Data);
+            //    currentNode = currentNode.Next;
+            //}
             throw new NotImplementedException();
+            //var currentNode = Head.Next;
+            //currentNode.Next.Equals(null);
+            //var prev = Head;
+
+            //while (currentNode != null)
+            //{
+            //    currentNode.Next = currentNode.Next.Next;
+            //    currentNode.Next = prev;
+            //    prev = currentNode;
+            //    currentNode = next;
+            //}
+
         }
 
         public override string ToString()
