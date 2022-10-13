@@ -133,10 +133,6 @@ namespace PracticeExercise2
 
         public void InsertAfter(T newValue, T existingValue)
         {
-            //throw new NotImplementedException();
-
-            
-            //var oldNode = existingValue;
             var currentNode = Head;
             int count = 0;
 
@@ -155,24 +151,6 @@ namespace PracticeExercise2
 
                 InsertAt(newValue, count + 1);
             }
-
-            
-
-
-            //length++;
-            //var newNode = new LinkedListNode<T>(newValue);
-
-            //var oldNode = existingValue;
-
-            //if (Contains(oldNode) == false)
-            //{
-            //    Append(newValue);
-
-            //}
-            //else
-            //{
-            //    InsertAt(newValue, FirstIndexOf(existingValue) + 1);
-            //}
         }
 
         public void InsertAt(T value, int index)
@@ -295,22 +273,6 @@ namespace PracticeExercise2
 
         public void RemoveAt(int index)
         {
-
-            //var currentNode = Head;
-            //int count = 0;
-
-
-
-
-            //while (currentNode.Next != null && count < length && (currentNode.Data.Equals(existingValue)) == false)
-            //{
-            //    currentNode = currentNode.Next;
-            //    count++;
-            //}
-
-            //InsertAt(newValue, count + 1);
-
-
             if (index < 0 || index >= length)
             {
                 throw new IndexOutOfRangeException();
@@ -367,74 +329,11 @@ namespace PracticeExercise2
 
                 }
             }
-
-            
-
-            //while (currentNode != null && current <= index)
-            //{
-            //    if (currentNode.Next != null && currentNode.Next.Equals(index))
-            //    {
-            //        var nodeToDelete = currentNode.Next;
-            //        length--;
-            //        if (nodeToDelete == Tail)
-            //        {
-            //            currentNode.Next = null;
-            //            Tail = currentNode;
-            //        }
-            //        else
-            //        {
-            //            currentNode.Next = currentNode.Next.Next;
-            //            nodeToDelete.Next = null;
-            //        }
-            //        return;
-
-
-            //    }
-
-            //    currentNode = currentNode.Next;
-
-            //}
-
-            //    if (index < 0) return;
-            //if (index == 0)
-            //{
-            //    Head = Head.Next;
-            //    return;
-            //}
-
-
-            //var currentNode = Head;
-            //int current = 0;
-            //while (current <= index && currentNode.Next != null)
-            //{
-            //    currentNode = currentNode.Next;
-            //    current++;
-            //}
-            //currentNode = currentNode.Next;
-            //length--;
         }
 
         public IList<T> Reverse()
         {
-            //var currentNode = Head;
-
-            //while (currentNode != null)
-            //{
-            //    Prepend(currentNode.Data);
-            //    currentNode = currentNode.Next;
-            //}
             throw new NotImplementedException();
-            //var currentNode = Head.Next;
-            //currentNode.Next.Equals(null);
-            //var prev = Head;
-
-            //while (currentNode != null)
-            //{
-            //    currentNode.Next = currentNode.Next.Next;
-            //    currentNode.Next = prev;
-            //    prev = currentNode;
-            //    currentNode = next;
-            //}
 
         }
 
